@@ -19,3 +19,5 @@ else
   NUM_PROCESSORS="$(nproc)"
 fi
 cmake --build . --config "$BUILD_TYPE" -- -j "$NUM_PROCESSORS"
+
+$SHELL
