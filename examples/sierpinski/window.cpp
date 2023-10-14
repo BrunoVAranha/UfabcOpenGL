@@ -95,8 +95,6 @@ void Window::onPaint() {
     m_P.x = radius * cos(random_angle);
     m_P.y = radius * sin(random_angle);
 
-    // The new position is the midpoint between the current position and the
-    // chosen vertex position
     m_P = (m_P + m_points.at(index)) / 4.0f;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -111,9 +109,9 @@ void Window::onPaint() {
   //////////// RETA 1 ////////////
   else if(!reta1Desenhada){
     //// Line properties
-    float x1 = 0.2f; // x-coordinate of the first point
-    float y1 = 0.0f; // y-coordinate of the first point
-    float x2 = - 0.4f; // x-coordinate of the second point
+    float x1 = 0.2f;
+    float y1 = 0.0f; 
+    float x2 = - 0.4f;
     float y2 = 0.3f;
     auto num_points_reta{120};
     std::uniform_int_distribution<int> pointDistribution(0, num_points_reta);
@@ -138,9 +136,9 @@ void Window::onPaint() {
     //////////// RETA 2 ////////////
   else if(!reta2Desenhada){
     //// Line properties
-    float x1 = 0.0f; // x-coordinate of the first point
-    float y1 = 0.0f; // y-coordinate of the first point
-    float x2 = -0.6f; // x-coordinate of the second point
+    float x1 = 0.0f;
+    float y1 = 0.0f;
+    float x2 = -0.6f;
     float y2 = 0.3f;
     auto num_points_reta{120};
     std::uniform_int_distribution<int> pointDistribution(0, num_points_reta);
@@ -168,10 +166,6 @@ void Window::onPaintUI() {
   {
     ImGui::SetNextWindowPos(ImVec2(5, 81));
     ImGui::Begin(" ", nullptr, ImGuiWindowFlags_NoDecoration);
-
-    // if (ImGui::Button("Clear window", ImVec2(150, 30))) {
-      //abcg::glClear(GL_COLOR_BUFFER_BIT);
-    // }
 
     ImGui::End();
   }
