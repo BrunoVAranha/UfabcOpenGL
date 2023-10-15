@@ -56,7 +56,7 @@ void Window::onCreate() {
   m_randomEngine.seed(seed);
 
   // Randomly pick a pair of coordinates in the range [-1; 1)
-  std::uniform_real_distribution<float> realDistribution(-1.0f, 1.0f);
+  //std::uniform_real_distribution<float> realDistribution(-1.0f, 1.0f);
   m_P.x = 0;
   m_P.y = 0;
 }
@@ -84,19 +84,17 @@ void Window::onPaint() {
 
   // CIRCULO//////////
   if(!circuloDesenhado){
-    float radius = 0.9f;
+    float raio = 0.9f;
 
     // Randomly pick the index of a triangle vertex
     std::uniform_int_distribution<int> intDistribution(0, m_points.size() - 1);
     auto const index{intDistribution(m_randomEngine)};
 
-    // Generate random angles
+    // Gerar angulo aleatório
     float random_angle = 2.0 * 3.141592653589793 * (rand() % 1000) / 1000.0;
-    m_P.x = radius * cos(random_angle);
-    m_P.y = radius * sin(random_angle);
+    m_P.x = raio * cos(random_angle);
+    m_P.y = raio * sin(random_angle);
 
-    // The new position is the midpoint between the current position and the
-    // chosen vertex position
     m_P = (m_P + m_points.at(index)) / 4.0f;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(5));

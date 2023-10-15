@@ -21,6 +21,7 @@ private:
   GLuint m_program{};
 
   std::default_random_engine m_randomEngine;
+
   std::array<glm::vec2, 3> const m_points{{{0, 1}, {-1, -1}, {1, -1}}};
   glm::vec2 m_P{};
 
