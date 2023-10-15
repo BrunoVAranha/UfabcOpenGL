@@ -37,9 +37,10 @@ void Window::onCreate() {
       {{.source = vertexShader, .stage = abcg::ShaderStage::Vertex},
        {.source = fragmentShader, .stage = abcg::ShaderStage::Fragment}});
 
-  // Clear window
-  abcg::glClearColor(0, 0, 0, 1);
-  abcg::glClear(GL_COLOR_BUFFER_BIT);
+
+  // Set the clear color
+  abcg::glClearColor(0, 0.5f, 0, 1);
+
 
   std::array<GLfloat, 2> sizes{};
 #if !defined(__EMSCRIPTEN__)
@@ -62,6 +63,12 @@ void Window::onCreate() {
 }
 
 void Window::onPaint() {
+
+  // Set the uniform variable outColor in your shader
+GLint outColorLocation = glGetUniformLocation(m_program, "outColor");
+glUseProgram(m_program);
+glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
+
   
   // Create OpenGL buffers for drawing the point at m_P
   setupModel();
@@ -164,12 +171,16 @@ void Window::onPaintUI() {
   abcg::OpenGLWindow::onPaintUI();
 
   {
-    ImGui::SetNextWindowPos(ImVec2(5, 81));
+    ImGui::SetNextWindowPos(ImVec2(5, 75));
     ImGui::Begin(" ", nullptr, ImGuiWindowFlags_NoDecoration);
 
-    // if (ImGui::Button("Clear window", ImVec2(150, 30))) {
-      //abcg::glClear(GL_COLOR_BUFFER_BIT);
-    // }
+    if (ImGui::Button("Clear window", ImVec2(150, 30))) {
+      abcg::glClear(GL_COLOR_BUFFER_BIT);
+      circuloDesenhado = false;
+      reta1Desenhada = false;
+      reta2Desenhada = false;
+      num_points = 0;
+    }
 
     ImGui::End();
   }
@@ -180,6 +191,7 @@ void Window::onResize(glm::ivec2 const &size) {
 
   abcg::glClear(GL_COLOR_BUFFER_BIT);
 }
+
 
 void Window::onDestroy() {
   // Release shader program, VBO and VAO
