@@ -126,7 +126,7 @@ void Window::onPaint() {
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if (num_points >= 200) {
+    if (num_points >= 150) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
@@ -153,7 +153,7 @@ void Window::onPaint() {
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if (num_points >= 200) {
+    if (num_points >= 150) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
