@@ -37,10 +37,8 @@ void Window::onCreate() {
       {{.source = vertexShader, .stage = abcg::ShaderStage::Vertex},
        {.source = fragmentShader, .stage = abcg::ShaderStage::Fragment}});
 
-
   // Set the clear color
   abcg::glClearColor(0, 0.5f, 0, 1);
-
 
   std::array<GLfloat, 2> sizes{};
 #if !defined(__EMSCRIPTEN__)
@@ -57,7 +55,7 @@ void Window::onCreate() {
   m_randomEngine.seed(seed);
 
   // Randomly pick a pair of coordinates in the range [-1; 1)
-  //std::uniform_real_distribution<float> realDistribution(-1.0f, 1.0f);
+  // std::uniform_real_distribution<float> realDistribution(-1.0f, 1.0f);
   m_P.x = 0;
   m_P.y = 0;
 }
@@ -65,11 +63,10 @@ void Window::onCreate() {
 void Window::onPaint() {
 
   // Set the uniform variable outColor in your shader
-GLint outColorLocation = glGetUniformLocation(m_program, "outColor");
-glUseProgram(m_program);
-glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
+  GLint outColorLocation = glGetUniformLocation(m_program, "outColor");
+  glUseProgram(m_program);
+  glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
 
-  
   // Create OpenGL buffers for drawing the point at m_P
   setupModel();
 
@@ -90,7 +87,7 @@ glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
   abcg::glUseProgram(0);
 
   // CIRCULO//////////
-  if(!circuloDesenhado){
+  if (!circuloDesenhado) {
     float raio = 0.9f;
 
     // Randomly pick the index of a triangle vertex
@@ -106,21 +103,21 @@ glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
 
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
     num_points++;
-    if(num_points>= 1500){
-       num_points = 0;
-       circuloDesenhado = true;
+    if (num_points >= 1500) {
+      num_points = 0;
+      circuloDesenhado = true;
     }
   }
   ///////////////////////////////
 
   //////////// RETA 1 ////////////
-  else if(!reta1Desenhada){
+  else if (!reta1Desenhada) {
     //// Line properties
-    float x1 = 0.2f; // x-coordinate of the first point
-    float y1 = 0.0f; // y-coordinate of the first point
-    float x2 = - 0.4f; // x-coordinate of the second point
+    float x1 = 0.2f;  // x-coordinate of the first point
+    float y1 = 0.0f;  // y-coordinate of the first point
+    float x2 = -0.4f; // x-coordinate of the second point
     float y2 = 0.3f;
-    auto num_points_reta{120};
+    auto num_points_reta{80};
     std::uniform_int_distribution<int> pointDistribution(0, num_points_reta);
     auto const point{pointDistribution(m_randomEngine)};
 
@@ -129,25 +126,25 @@ glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if(num_points >= 500){
+    if (num_points >= 200) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
-    if(reta_offset >= 0.1f){
+    if (reta_offset >= 0.1f) {
       reta_offset = 0;
       reta1Desenhada = true;
     }
   }
-    ////////////////////////
+  ////////////////////////
 
-    //////////// RETA 2 ////////////
-  else if(!reta2Desenhada){
+  //////////// RETA 2 ////////////
+  else if (!reta2Desenhada) {
     //// Line properties
-    float x1 = 0.0f; // x-coordinate of the first point
-    float y1 = 0.0f; // y-coordinate of the first point
+    float x1 = 0.0f;  // x-coordinate of the first point
+    float y1 = 0.0f;  // y-coordinate of the first point
     float x2 = -0.6f; // x-coordinate of the second point
     float y2 = 0.3f;
-    auto num_points_reta{120};
+    auto num_points_reta{80};
     std::uniform_int_distribution<int> pointDistribution(0, num_points_reta);
     auto const point{pointDistribution(m_randomEngine)};
 
@@ -156,11 +153,11 @@ glUniform4f(outColorLocation, 0.0f, 0.0f, 1.0f, 1.0f); // Set outColor to blue
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if(num_points >= 500){
+    if (num_points >= 200) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
-    if(reta_offset >= 0.1f){
+    if (reta_offset >= 0.1f) {
       reta_offset = 0;
       reta2Desenhada = true;
     }
@@ -191,7 +188,6 @@ void Window::onResize(glm::ivec2 const &size) {
 
   abcg::glClear(GL_COLOR_BUFFER_BIT);
 }
-
 
 void Window::onDestroy() {
   // Release shader program, VBO and VAO
