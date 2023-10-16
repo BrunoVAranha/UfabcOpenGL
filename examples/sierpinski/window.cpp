@@ -101,7 +101,6 @@ void Window::onPaint() {
 
     m_P = (m_P + m_points.at(index)) / 4.0f;
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(5));
     num_points++;
     if (num_points >= 1500) {
       num_points = 0;
@@ -126,7 +125,7 @@ void Window::onPaint() {
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if (num_points >= 150) {
+    if (num_points >= 120) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
@@ -153,7 +152,7 @@ void Window::onPaint() {
     m_P.x = (x1 + t * (x2 - x1)) - reta_offset;
     m_P.y = (y1 + t * (y2 - y1));
     num_points++;
-    if (num_points >= 150) {
+    if (num_points >= 120) {
       num_points = 0;
       reta_offset = reta_offset + 0.01f;
     }
