@@ -20,4 +20,7 @@ else
 fi
 cmake --build . --config "$BUILD_TYPE" -- -j "$NUM_PROCESSORS"
 
-$SHELL
+read -p "Press Enter to exit..."
+
+
+

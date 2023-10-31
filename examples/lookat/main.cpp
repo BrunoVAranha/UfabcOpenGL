@@ -5,8 +5,12 @@ int main(int argc, char **argv) {
     abcg::Application app(argc, argv);
 
     Window window;
-    window.setWindowSettings(
-        {.width = 600, .height = 600, .title = "Tic-Tac-Toe"});
+    window.setOpenGLSettings({.samples = 4});
+    window.setWindowSettings({
+        .width = 600,
+        .height = 600,
+        .title = "LookAt Camera",
+    });
 
     app.run(window);
   } catch (std::exception const &exception) {
